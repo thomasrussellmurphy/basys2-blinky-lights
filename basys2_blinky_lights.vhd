@@ -42,6 +42,7 @@ entity basys2_blinky_lights is
 end basys2_blinky_lights;
 
 architecture Structural of basys2_blinky_lights is
+  signal c_slow_en : boolean;
 begin
   -- Set unused LED indicators dark
   SEG <= (others => '1');
@@ -64,11 +65,19 @@ begin
   PIO <= (others => '0') when (false) else (others => 'Z');
   EppDB <= (others => '0') when (false) else (others => 'Z');
   
+  -- Instantiate the very slow enable module
+  slow_enable_inst: entity slow_enable (RTL)
+  port map (
+    CLK => UCLK,
+    c_en => true,
+    c_en_out => c_slow_en
+  );
+  
   -- Instantiate the LED module
   blink_leds_inst: entity blink_leds (RTL)
   port map (
     CLK => UCLK,
-    c_en => false,
+    c_en => c_slow_en,
     c_led => LED
   );
 end Structural;
