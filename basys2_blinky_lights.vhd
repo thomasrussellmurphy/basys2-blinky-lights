@@ -67,6 +67,9 @@ begin
   
   -- Instantiate the very slow enable module
   slow_enable_inst: entity slow_enable (RTL)
+  generic map (
+     k_division_width => 23
+  )
   port map (
     CLK => UCLK,
     c_en => true,
