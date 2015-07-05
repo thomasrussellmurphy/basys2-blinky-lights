@@ -48,7 +48,7 @@ begin
   end process next_state;
   
   -- Determine direction to move
-  shift_direction: process(c_led_state)
+  shift_direction: process(c_led_state, c_dir_left)
   begin
     -- Default to retain current shifting direction
     c_dir_left_next <= c_dir_left;
