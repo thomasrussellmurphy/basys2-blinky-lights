@@ -4,6 +4,9 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity slow_enable is
+  generic (
+    k_division_width : natural := 26
+  );
   port (
     -- Clock input
     CLK : in std_logic;
@@ -15,7 +18,7 @@ end slow_enable;
 
 architecture RTL of slow_enable is
   -- internal signals
-  signal counter : unsigned(25 downto 0) := (others => '0');
+  signal counter : unsigned(k_division_width downto 0) := (others => '0');
 begin
   -- logic and processes
   registers: process (CLK)
