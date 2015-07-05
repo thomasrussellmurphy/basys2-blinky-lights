@@ -43,8 +43,7 @@ end basys2_blinky_lights;
 
 architecture Structural of basys2_blinky_lights is
 begin
-  -- Set LED indicators dark
-  LED <= (others => '0');
+  -- Set unused LED indicators dark
   SEG <= (others => '1');
   AN <= (others => '1');
   DP <= '1';
@@ -64,4 +63,12 @@ begin
   PS2D <= 'Z';
   PIO <= (others => '0') when (false) else (others => 'Z');
   EppDB <= (others => '0') when (false) else (others => 'Z');
+  
+  -- Instantiate the LED module
+  blink_leds_inst: entity blink_leds (RTL)
+  port map (
+    CLK => UCLK,
+    c_en => false,
+    c_led => LED
+  );
 end Structural;
