@@ -1,7 +1,7 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.STD_LOGIC_ARITH.ALL;
+  use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity basys2_blinky_lights is
   port (
@@ -48,23 +48,23 @@ begin
   SEG <= (others => '1');
   AN <= (others => '1');
   DP <= '1';
-  
+
   -- Set VGA all low
   VGA_RED <= (others => '0');
   VGA_GREEN <= (others => '0');
   VGA_BLUE <= (others => '0');
   VGA_HS <= '0';
   VGA_VS <= '0';
-  
+
   -- Set EppWait to no-ack
   EppWait <= '0';
-  
+
   -- Tristate all INOUTs
   PS2C <= 'Z';
   PS2D <= 'Z';
   PIO <= (others => '0') when (false) else (others => 'Z');
   EppDB <= (others => '0') when (false) else (others => 'Z');
-  
+
   -- Instantiate the very slow enable module
   slow_enable_inst: entity slow_enable (RTL)
   generic map (
@@ -75,7 +75,7 @@ begin
     c_en => true,
     c_en_out => c_slow_en
   );
-  
+
   -- Instantiate the LED module
   blink_leds_inst: entity blink_leds (RTL)
   port map (
